@@ -1,0 +1,11 @@
+{
+    "name": "ffmpeg",
+    "id": 20000,
+    "commands": [
+        {
+            "theme": "ffmpeg",
+            "syntax": "ffmpeg Test(&J):J",
+            "threadSafe": true
+        }
+    ]
+}

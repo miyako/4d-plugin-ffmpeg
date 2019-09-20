@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xliff version="1.0" xmlns:d4="http://www.4d.com/d4-ns">
+    <header>
+        <note>ffmpeg</note>
+    </header>
+    <group resname="themes">
+        <trans-unit id="" resname="FAF63115739E45D79939033FFD93D8E5" translate="no">
+            <source>ffmpeg</source>
+        </trans-unit>
+    </group>
+    <group restype="x-4DK#" d4:groupName="FAF63115739E45D79939033FFD93D8E5">
+    </group>
+</xliff>
