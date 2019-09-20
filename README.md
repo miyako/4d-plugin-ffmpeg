@@ -3,7 +3,7 @@ boilerplate project for static ffmpeg plugin edition
 
 ### **work in progress** 
 
-* ffmpeg Mac: ``4.2.1`` Windows: ``3.3`` TODO: update vcpkg to ``4.1`` 
+* ffmpeg Mac: ``4.2.1`` Windows (vcpkg): ~~``3.3``~~ ``4.1`` 
 
 #### Why build a plugin?
 
