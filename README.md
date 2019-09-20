@@ -37,3 +37,4 @@ Build ``libx264`` first, then build ``ffmpeg``
 
 Some headers, such as ``config.h`` need to be copied to project after the ``configure``.
 
+Also ``libavutil/thread.h`` ``libavutil/internal.h`` ``libavutil/timer.h`` ``libavutil/x86`` ``libavutil/libm.h``
