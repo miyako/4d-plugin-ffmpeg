@@ -17,7 +17,7 @@ With 4D, static builds of [``ffmpeg``](https://ffmpeg.zeranoe.com/builds/) and [
 
 If the plugin is C++, surround the include headers:
 
-``c
+```c
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -27,7 +27,7 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-``
+```
 
 Build ``libx264`` first, then build ``ffmpeg``
 
