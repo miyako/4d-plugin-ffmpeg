@@ -7,7 +7,7 @@ boilerplate project for static ffmpeg plugin edition
 
 #### Why build a plugin?
 
-``ffmpeg`` and ``mp4box`` are essential tools for creating video contents for streaming.
+[``ffmpeg``](https://ffmpeg.zeranoe.com/builds/) and [``mp4box``](https://gpac.wp.imt.fr/2015/07/29/gpac-build-mp4box-only-all-platforms/) are essential tools for creating video contents for streaming.
 
 c.f. [Making Your Own Simple MPEG-DASH Server](https://www.instructables.com/id/Making-Your-Own-Simple-DASH-MPEG-Server-Windows-10/)
 
