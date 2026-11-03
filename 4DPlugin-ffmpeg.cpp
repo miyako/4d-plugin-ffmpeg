@@ -24,7 +24,8 @@ void OnStartup()
 
 void OnExit()
 {
-    
+    // pairs with avformat_network_init() in OnStartup()
+    avformat_network_deinit();
 }
 
 void PluginMain(PA_long32 selector, PA_PluginParameters params) {
@@ -260,25 +261,25 @@ void ffmpeg_Test(PA_PluginParameters params) {
 
     BenchmarkTimeStamps ti;
     
-    FilterGraph **filtergraphs;
-    int        nb_filtergraphs;
-    uint8_t *subtitle_out;
+    FilterGraph **filtergraphs = NULL;
+    int        nb_filtergraphs = 0;
+    uint8_t *subtitle_out = NULL;
     int         nb_output_files   = 0;
-    OutputFile   **output_files;
+    OutputFile   **output_files = NULL;
     int         nb_output_streams = 0;
     OutputStream **output_streams = NULL;
     InputStream **input_streams = NULL;
     int        nb_input_files   = 0;
     InputFile   **input_files   = NULL;
     int        nb_input_streams = 0;
-    char *vstats_filename;
-    FILE *vstats_file;
+    char *vstats_filename = NULL;
+    FILE *vstats_file = NULL;
     
     int run_as_daemon  = 0;
     int nb_frames_dup = 0;
     unsigned dup_warning = 1000;
     int nb_frames_drop = 0;
-    int64_t decode_error_stat[2];
+    int64_t decode_error_stat[2] = {0, 0};
     int want_sdp = 1;
     
     /* ffmpeg_parse_options */
