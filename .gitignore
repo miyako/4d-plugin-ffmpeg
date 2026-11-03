@@ -1,0 +1,10 @@
+.DS_Store
+build/
+Objs/
+test/Data/Logs/
+test/Logs/
+test/userPreferences.*/
+test/Project/DerivedData/
+test/Plugins/Default/
+test/Plugins/ffmpeg.bundle/Contents/MacOS/
+test/Plugins/ffmpeg.bundle/Contents/_CodeSignature/
