@@ -44,11 +44,23 @@ if (-not $ok) {
   Invoke-Native git @("-C", $Vcpkg, "checkout", "-q", "FETCH_HEAD")
 }
 
+# vcpkg compiles with the newest MSVC on the machine, but the plugin is built
+# with the v143 toolset: C++ code in the libraries (avfilter's WinRT capture)
+# then calls STL helpers v143 doesn't have (__std_regex_...). Pin v143.
+$Triplets = Join-Path $Work "triplets"
+New-Item -ItemType Directory -Force -Path $Triplets | Out-Null
+Set-Content -Path (Join-Path $Triplets "$TRIPLET.cmake") -Value @"
+set(VCPKG_TARGET_ARCHITECTURE x64)
+set(VCPKG_CRT_LINKAGE static)
+set(VCPKG_LIBRARY_LINKAGE static)
+set(VCPKG_PLATFORM_TOOLSET v143)
+"@
+
 $Exe = Join-Path $Vcpkg "vcpkg.exe"
 if (-not (Test-Path $Exe)) {
   Invoke-Native (Join-Path $Vcpkg "bootstrap-vcpkg.bat") @("-disableMetrics")
 }
-Invoke-Native $Exe @("install", "ffmpeg[$FEATURES]:$TRIPLET", "--disable-metrics", "--clean-after-build")
+Invoke-Native $Exe @("install", "ffmpeg[$FEATURES]:$TRIPLET", "--overlay-triplets=$Triplets", "--disable-metrics", "--clean-after-build")
 
 $Installed = Join-Path $Vcpkg "installed\$TRIPLET"
 

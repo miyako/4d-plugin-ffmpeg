@@ -78,6 +78,11 @@ build_arch() {
   local SDK; SDK="$(xcrun --sdk macosx --show-sdk-path)"
   mkdir -p "$D"
 
+  # x86_64 assembly goes through nasm, which doesn't take -arch;
+  # arm64 assembly goes through clang, which needs it
+  local ASFLAGS_ARG=""
+  [ "$ARCH" = arm64 ] && ASFLAGS_ARG="--extra-asflags=$FLAGS"
+
   if [ ! -f "$D/x264/lib/libx264.a" ]; then
     rm -rf "$D/x264-build"
     rsync -a --exclude .git "$SRC/x264/" "$D/x264-build/"
@@ -85,7 +90,7 @@ build_arch() {
       run "$D/x264-configure.log" env CC=clang ./configure --host="$HOST" --prefix="$D/x264" \
         --enable-static --enable-pic --disable-cli \
         --extra-cflags="$FLAGS -isysroot $SDK" --extra-ldflags="$FLAGS -isysroot $SDK" \
-        --extra-asflags="$FLAGS" &&
+        ${ASFLAGS_ARG:+"$ASFLAGS_ARG"} &&
       run "$D/x264-make.log" make -j"$JOBS" &&
       run "$D/x264-install.log" make install-lib-static)
   fi
