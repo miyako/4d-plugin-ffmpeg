@@ -75,7 +75,7 @@ $result:=ffmpeg Test($param)  // placeholder, does nothing
 
 ## Building
 
-- **macOS**: `scripts/build-macos-deps.sh` builds x264 and FFmpeg once per architecture and merges them into universal archives in `a/` (`libavcodec.a`, `libavdevice.a`, `libavfilter.a`, `libavformat.a`, `libavutil.a`, `libswresample.a`, `libswscale.a`, `libx264.a`), and copies the FFmpeg headers to `include/ffmpeg/m/`. It needs the Xcode command line tools and `brew install nasm pkg-config`. The Xcode project then links those archives plus `-lz -lbz2 -liconv` and the Apple frameworks.
+- **macOS**: `scripts/build-macos-deps.sh` builds x264 and FFmpeg once per architecture and merges them into universal archives in `a/` (`libavcodec.a`, `libavdevice.a`, `libavfilter.a`, `libavformat.a`, `libavutil.a`, `libswresample.a`, `libswscale.a`, `libx264.a`), and copies the FFmpeg headers to `include/ffmpeg/m/`. It needs the Xcode command line tools and `brew install nasm pkg-config`. The Xcode project then links those archives plus `-lz -lbz2 -liconv` and the Apple frameworks (CoreAudio included, for the AudioToolbox output device).
 - **Windows**: `scripts\build-windows-deps.ps1` installs `ffmpeg[gpl,x264,zlib,bzip2,iconv]` for `x64-windows-static` with vcpkg pinned to release 2026.10.16, and copies the libraries to `lib\windows64\` and the headers to `include\ffmpeg\w\`. It needs Visual Studio 2022 with the C++ tools; vcpkg downloads the rest (MSYS2, NASM).
 
 `.github/workflows/ci.yml` runs both scripts and builds the plugin, unsigned, on every push; `release.yml` does the same before signing. Both cache the libraries under the hash of the script, so changing a pinned version rebuilds them.

@@ -458,6 +458,8 @@
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lbz2",
+					"-framework",
+					CoreAudio,
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4D.ffmpeg;
@@ -514,6 +516,8 @@
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lbz2",
+					"-framework",
+					CoreAudio,
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4D.ffmpeg;
@@ -568,6 +572,8 @@
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lbz2",
+					"-framework",
+					CoreAudio,
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4D.ffmpeg;
