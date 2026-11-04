@@ -32,6 +32,20 @@ unset CPATH LIBRARY_PATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH PKG_CONFIG_PATH
 command -v nasm >/dev/null || { echo "nasm is needed for the x86_64 assembly (brew install nasm)" >&2; exit 1; }
 command -v pkg-config >/dev/null || { echo "pkg-config is needed (brew install pkg-config)" >&2; exit 1; }
 
+# run <log file> <command...>: keep the output in the log, show its end
+# (and configure's own log, when there is one) if the command fails
+run() {
+  local log="$1"; shift
+  if ! "$@" >"$log" 2>&1; then
+    echo "::error::$* failed, end of $log:" >&2
+    tail -n 60 "$log" >&2
+    for c in config.log ffbuild/config.log; do
+      [ -f "$c" ] && { echo "--- end of $(pwd)/$c:" >&2; tail -n 80 "$c" >&2; }
+    done
+    return 1
+  fi
+}
+
 # fetch <repo url> <commit sha or tag> <dir>
 fetch() {
   # skip only a completed checkout (a failed fetch leaves an empty repo behind)
@@ -68,19 +82,19 @@ build_arch() {
     rm -rf "$D/x264-build"
     rsync -a --exclude .git "$SRC/x264/" "$D/x264-build/"
     (cd "$D/x264-build" &&
-      CC="$(xcrun -f clang)" ./configure --host="$HOST" --prefix="$D/x264" \
+      run "$D/x264-configure.log" env CC=clang ./configure --host="$HOST" --prefix="$D/x264" \
         --enable-static --enable-pic --disable-cli \
         --extra-cflags="$FLAGS -isysroot $SDK" --extra-ldflags="$FLAGS -isysroot $SDK" \
-        --extra-asflags="$FLAGS" >/dev/null &&
-      make -j"$JOBS" >/dev/null &&
-      make install-lib-static >/dev/null)
+        --extra-asflags="$FLAGS" &&
+      run "$D/x264-make.log" make -j"$JOBS" &&
+      run "$D/x264-install.log" make install-lib-static)
   fi
 
   if [ ! -f "$D/ffmpeg/lib/libavcodec.a" ]; then
     rm -rf "$D/ffmpeg-build"
     mkdir -p "$D/ffmpeg-build"
     (cd "$D/ffmpeg-build" &&
-      PKG_CONFIG_LIBDIR="$D/x264/lib/pkgconfig" \
+      run "$D/ffmpeg-configure.log" env PKG_CONFIG_LIBDIR="$D/x264/lib/pkgconfig" \
       "$SRC/ffmpeg/configure" --prefix="$D/ffmpeg" \
         --enable-cross-compile --arch="$ARCH" --target-os=darwin \
         --cc="$(xcrun -f clang)" --sysroot="$SDK" \
@@ -91,10 +105,10 @@ build_arch() {
         --enable-appkit --enable-avfoundation --enable-coreimage \
         --enable-audiotoolbox --enable-videotoolbox \
         --enable-zlib --enable-bzlib --enable-iconv \
-        --enable-gpl --enable-libx264 --pkg-config-flags=--static >/dev/null &&
+        --enable-gpl --enable-libx264 --pkg-config-flags=--static &&
       grep -q '^#define CONFIG_LIBX264 1' config.h &&
-      make -j"$JOBS" >/dev/null &&
-      make install >/dev/null)
+      run "$D/ffmpeg-make.log" make -j"$JOBS" &&
+      run "$D/ffmpeg-install.log" make install)
   fi
 }
 
