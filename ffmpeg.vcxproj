@@ -205,7 +205,7 @@
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>Bcrypt.lib;Vfw32.lib;Strmiids.lib;Secur32.lib;shlwapi.lib;ws2_32.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swscale.lib;swresample.lib;libx264.lib;libiconv.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>avdevice.lib;avfilter.lib;avformat.lib;avcodec.lib;swresample.lib;swscale.lib;avutil.lib;libx264.lib;zlib.lib;bz2.lib;iconv.lib;charset.lib;Bcrypt.lib;Vfw32.lib;Strmiids.lib;Secur32.lib;shlwapi.lib;ws2_32.lib;mfplat.lib;mfuuid.lib;ole32.lib;oleaut32.lib;uuid.lib;user32.lib;gdi32.lib;psapi.lib;advapi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib\windows64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

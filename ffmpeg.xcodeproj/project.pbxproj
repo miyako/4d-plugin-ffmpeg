@@ -48,14 +48,10 @@
 		D1B5EFC52333C5CC002A3CC3 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFC42333C5CC002A3CC3 /* libavcodec.a */; };
 		D1B5EFC72333C5FF002A3CC3 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFC62333C5FF002A3CC3 /* libavdevice.a */; };
 		D1B5EFD02333C81D002A3CC3 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFC82333C81C002A3CC3 /* libavfilter.a */; };
-		D1B5EFD12333C81D002A3CC3 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFC92333C81D002A3CC3 /* libjsoncpp.a */; };
 		D1B5EFD22333C81D002A3CC3 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFCA2333C81D002A3CC3 /* libswscale.a */; };
-		D1B5EFD32333C81D002A3CC3 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFCB2333C81D002A3CC3 /* libpostproc.a */; };
 		D1B5EFD42333C81D002A3CC3 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFCC2333C81D002A3CC3 /* libswresample.a */; };
 		D1B5EFD52333C81D002A3CC3 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFCD2333C81D002A3CC3 /* libavformat.a */; };
 		D1B5EFD62333C81D002A3CC3 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFCE2333C81D002A3CC3 /* libavutil.a */; };
-		D1B5EFD92333C9FF002A3CC3 /* libiconv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFD82333C9FF002A3CC3 /* libiconv.a */; };
-		D1B5EFDB2333D22B002A3CC3 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = D1B5EFDA2333D22A002A3CC3 /* config.h */; };
 		D1B5EFDD2333D2C0002A3CC3 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5EFDC2333D2C0002A3CC3 /* libx264.a */; };
 		C04C8B7AEBB26721D873A3C1 /* constants.xlf in CopyFiles */ = {isa = PBXBuildFile; fileRef = D14D10DD1A03A8A5008B3411 /* constants.xlf */; };
 /* End PBXBuildFile section */
@@ -119,14 +115,10 @@
 		D1B5EFC42333C5CC002A3CC3 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = a/libavcodec.a; sourceTree = "<group>"; };
 		D1B5EFC62333C5FF002A3CC3 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = a/libavdevice.a; sourceTree = "<group>"; };
 		D1B5EFC82333C81C002A3CC3 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = a/libavfilter.a; sourceTree = "<group>"; };
-		D1B5EFC92333C81D002A3CC3 /* libjsoncpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjsoncpp.a; path = a/libjsoncpp.a; sourceTree = "<group>"; };
 		D1B5EFCA2333C81D002A3CC3 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = a/libswscale.a; sourceTree = "<group>"; };
-		D1B5EFCB2333C81D002A3CC3 /* libpostproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpostproc.a; path = a/libpostproc.a; sourceTree = "<group>"; };
 		D1B5EFCC2333C81D002A3CC3 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = a/libswresample.a; sourceTree = "<group>"; };
 		D1B5EFCD2333C81D002A3CC3 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = a/libavformat.a; sourceTree = "<group>"; };
 		D1B5EFCE2333C81D002A3CC3 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = a/libavutil.a; sourceTree = "<group>"; };
-		D1B5EFD82333C9FF002A3CC3 /* libiconv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiconv.a; path = a/libiconv.a; sourceTree = "<group>"; };
-		D1B5EFDA2333D22A002A3CC3 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = include/ffmpeg/m/config.h; sourceTree = "<group>"; };
 		D1B5EFDC2333D2C0002A3CC3 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = a/libx264.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,7 +127,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1B5EFD92333C9FF002A3CC3 /* libiconv.a in Frameworks */,
 				D1B5EFD42333C81D002A3CC3 /* libswresample.a in Frameworks */,
 				D1A140AA23321E3500A2726B /* libx264.a in Frameworks */,
 				D1A140C42332270F00A2726B /* CoreServices.framework in Frameworks */,
@@ -159,10 +150,8 @@
 				D1A140AC233226AD00A2726B /* Foundation.framework in Frameworks */,
 				D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */,
 				D1A140A823321E1D00A2726B /* liblzma.tbd in Frameworks */,
-				D1B5EFD12333C81D002A3CC3 /* libjsoncpp.a in Frameworks */,
 				D1A140A623321E1500A2726B /* libiconv.tbd in Frameworks */,
 				D1A140A423321DFE00A2726B /* libbz2.tbd in Frameworks */,
-				D1B5EFD32333C81D002A3CC3 /* libpostproc.a in Frameworks */,
 				D1B5EFD02333C81D002A3CC3 /* libavfilter.a in Frameworks */,
 				D1A140A223321DF200A2726B /* libz.tbd in Frameworks */,
 			);
@@ -280,7 +269,6 @@
 		D1A140C5233300CD00A2726B /* ffmpeg */ = {
 			isa = PBXGroup;
 			children = (
-				D1B5EFDA2333D22A002A3CC3 /* config.h */,
 			);
 			name = ffmpeg;
 			sourceTree = "<group>";
@@ -294,11 +282,8 @@
 				D1B5EFC82333C81C002A3CC3 /* libavfilter.a */,
 				D1B5EFCD2333C81D002A3CC3 /* libavformat.a */,
 				D1B5EFCE2333C81D002A3CC3 /* libavutil.a */,
-				D1B5EFC92333C81D002A3CC3 /* libjsoncpp.a */,
-				D1B5EFCB2333C81D002A3CC3 /* libpostproc.a */,
 				D1B5EFCC2333C81D002A3CC3 /* libswresample.a */,
 				D1B5EFCA2333C81D002A3CC3 /* libswscale.a */,
-				D1B5EFD82333C9FF002A3CC3 /* libiconv.a */,
 			);
 			name = a;
 			sourceTree = "<group>";
@@ -318,7 +303,6 @@
 				18B684FB06944F2000CC6A1E /* PublicTypes.h in Headers */,
 				D1A1408B23321C9A00A2726B /* C_TYPES.h in Headers */,
 				D1A1408A23321C9A00A2726B /* C_TEXT.h in Headers */,
-				D1B5EFDB2333D22B002A3CC3 /* config.h in Headers */,
 				D1A1408D23321C9A00A2726B /* ARRAY_TEXT.h in Headers */,
 				D120937F13534DCC00A72CAA /* 4DPlugin-ffmpeg.h in Headers */,
 				D1A1408123321C5600A2726B /* 4DPlugin-JSON.h in Headers */,
@@ -471,7 +455,10 @@
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lbz2",
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4D.ffmpeg;
 				PRODUCT_NAME = ffmpeg;
@@ -524,7 +511,10 @@
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lbz2",
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4D.ffmpeg;
 				PRODUCT_NAME = ffmpeg;
@@ -575,7 +565,10 @@
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lbz2",
+				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.4D.ffmpeg;
 				PRODUCT_NAME = ffmpeg;

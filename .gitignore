@@ -8,3 +8,8 @@ test/Project/DerivedData/
 test/Plugins/Default/
 test/Plugins/ffmpeg.bundle/Contents/MacOS/
 test/Plugins/ffmpeg.bundle/Contents/_CodeSignature/
+
+# built by scripts/build-macos-deps.sh and scripts/build-windows-deps.ps1
+a/
+lib/windows64/
+include/ffmpeg/

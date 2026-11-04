@@ -79,24 +79,34 @@ jobs:
         with:
           ref: ${{ needs.version.outputs.tag }}
 
-      # ffmpeg-specific: the Windows import libraries are not committed
-      # (removed in 805a5cf, published only as lib.zip on the lib-4.1 release).
-      # Fail with the list of missing files instead of LNK1181.
-      - name: check prebuilt Windows libraries
-        shell: pwsh
-        run: |
-          $missing = 0
-          foreach ($lib in @('avcodec','avdevice','avfilter','avformat','avutil','swscale','swresample','libx264','libiconv','jsoncpp')) {
-            $path = "lib/windows64/$lib.lib"
-            if (-not (Test-Path $path)) {
-              Write-Host "::error::Missing prebuilt library $path"
-              $missing = 1
-            }
-          }
-          exit $missing
-
       - name: setup MSBuild
         uses: microsoft/setup-msbuild@v2
+
+      # FFmpeg and x264 are not committed: scripts/build-windows-deps.ps1 builds
+      # them with vcpkg pinned to a release. The result is cached under the
+      # script's hash and saved right after the build.
+      - name: restore prebuilt libraries
+        id: deps-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            lib/windows64/*.lib
+            include/ffmpeg/w
+          key: windows-deps-${{ hashFiles('scripts/build-windows-deps.ps1') }}
+
+      - name: build prebuilt libraries (cache miss)
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: scripts/build-windows-deps.ps1 lib/windows64
+
+      - name: save prebuilt libraries
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            lib/windows64/*.lib
+            include/ffmpeg/w
+          key: windows-deps-${{ hashFiles('scripts/build-windows-deps.ps1') }}
 
       - name: clean stale outputs
         shell: pwsh
@@ -163,6 +173,34 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ needs.version.outputs.tag }}
+
+      # FFmpeg and x264 are not committed: scripts/build-macos-deps.sh builds
+      # them from pinned sources. The result is cached under the script's hash,
+      # and saved right after the build, so a later signing or notarization
+      # failure doesn't throw the build away.
+      - name: restore prebuilt libraries
+        id: deps-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            a/*.a
+            include/ffmpeg/m
+          key: macos-deps-${{ hashFiles('scripts/build-macos-deps.sh') }}
+
+      - name: build prebuilt libraries (cache miss)
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          brew install nasm pkg-config || true
+          scripts/build-macos-deps.sh a
+
+      - name: save prebuilt libraries
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            a/*.a
+            include/ffmpeg/m
+          key: macos-deps-${{ hashFiles('scripts/build-macos-deps.sh') }}
 
       - name: check prebuilt libraries
         run: |
@@ -274,6 +312,13 @@ jobs:
           lipo -info "$BIN" | grep -q "x86_64"
           if lipo -info "$BIN" | grep -q "i386"; then
             echo "::error::i386 slice found - this is a stale binary, not the fresh build"
+            exit 1
+          fi
+
+          # FFmpeg and x264 are linked statically: only system libraries at run time
+          otool -L "$BIN"
+          if otool -L "$BIN" | tail -n +2 | grep -v -E '^[[:space:]]+(/usr/lib/|/System/Library/)'; then
+            echo "::error::$BIN links a library outside the system"
             exit 1
           fi
 
